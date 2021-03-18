@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmap/models/user_model.dart';
 import 'package:pharmap/screens/auth/splash_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +13,7 @@ class WrapperScreen extends StatefulWidget {
 class _WrapperScreenState extends State<WrapperScreen> {
   @override
   Widget build(BuildContext context) {
-    UserModel user = Provider.of<UserModel>(context);
-    print(user != null);
+    User user = Provider.of<User>(context);
     if (user == null) {
       return SplashScreen();
     } else {

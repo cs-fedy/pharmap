@@ -1,19 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pharmap/models/user_model.dart';
+import 'package:pharmap/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final Database _db = Database();
 
-  UserModel _mapToUserModel(User user) {
-    return user != null ? UserModel(uid: user.uid, email: user.email) : null;
+  Stream<User> get user {
+    return _auth.authStateChanges();
   }
 
-  Stream<UserModel> get user {
-    return _auth.authStateChanges().map(_mapToUserModel);
-  }
-
-  Future<UserModel> signupWithEmailAndPassword(
-      String emailAddress, String password) async {
+  Future<User> signupWithEmailAndPassword(String emailAddress, String password,
+      String fullName, int phoneNumber) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -21,7 +18,8 @@ class AuthService {
         password: password,
       );
       User createdUser = userCredential.user;
-      return _mapToUserModel(createdUser);
+      await _db.addUserInfo(createdUser.uid, fullName, phoneNumber);
+      return createdUser;
     } catch (error) {
       return null;
     }

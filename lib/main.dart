@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmap/models/user_model.dart';
 import 'package:pharmap/screens/auth/Signup_screen.dart';
 import 'package:pharmap/screens/auth/login_screen.dart';
+import 'package:pharmap/screens/auth/option_screen.dart';
 import 'package:pharmap/screens/auth/splash_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
 import 'package:pharmap/screens/wrapper_screen.dart';
@@ -19,7 +20,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<UserModel>.value(
+    return StreamProvider<User>.value(
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           SplashScreen.id: (BuildContext context) => SplashScreen(),
           LoginScreen.id: (BuildContext context) => LoginScreen(),
           SignupScreen.id: (BuildContext context) => SignupScreen(),
+          OptionScreen.id: (BuildContext context) => OptionScreen(),
           HomeScreen.id: (BuildContext context) => HomeScreen(),
         },
       ),

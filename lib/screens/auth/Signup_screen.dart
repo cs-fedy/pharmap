@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
 import 'package:pharmap/components/login_with_social_media.dart';
-import 'package:pharmap/models/user_model.dart';
 import 'package:pharmap/services/auth.dart';
 import 'package:pharmap/utils/constants.dart';
 
@@ -26,13 +25,11 @@ class _SignupScreenState extends State<SignupScreen> {
     _formKey.currentState.save();
     // TODO: verify user input
     // TODO: make sure that the user doesn't exist in the db
-    final UserModel user =
-        await auth.signupWithEmailAndPassword(emailAddress, password);
+    final User user = await auth.signupWithEmailAndPassword(
+        emailAddress, password, fullName, phoneNumber);
     if (user != null) {
-      // TODO: redirect t choose between client or pharmacist screen
+      Navigator.pushReplacementNamed(context, '/OptionScreen');
     }
-    //! Next line will be moved to fill pharmacy data screen
-    Navigator.pushReplacementNamed(context, '/WrapperScreen');
   }
 
   void _handleGoogleSignIn() async {
