@@ -4,7 +4,7 @@ import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/utils/constants.dart';
 
 class SplashScreen extends StatelessWidget {
-  static final String id = '/splashScreen';
+  static final String id = '/SplashScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class SplashScreen extends StatelessWidget {
                       CustomButton(
                         text: "Login",
                         press: () =>
-                            Navigator.pushNamed(context, '/loginScreen'),
+                            Navigator.pushReplacementNamed(context, '/LoginScreen'),
                         bgColor: primaryColor,
                       ),
                       SizedBox(
@@ -62,7 +62,7 @@ class SplashScreen extends StatelessWidget {
                       CustomButton(
                         text: "Signup",
                         press: () =>
-                            Navigator.pushNamed(context, '/signupScreen'),
+                            Navigator.pushReplacementNamed(context, '/SignupScreen'),
                         bgColor: secondaryColor,
                       ),
                     ],

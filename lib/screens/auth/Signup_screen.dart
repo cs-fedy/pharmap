@@ -1,20 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
 import 'package:pharmap/components/login_with_social_media.dart';
+import 'package:pharmap/models/user_model.dart';
+import 'package:pharmap/services/auth.dart';
 import 'package:pharmap/utils/constants.dart';
 
 class SignupScreen extends StatefulWidget {
-  static final String id = '/signupScreen';
+  static final String id = '/SignupScreen';
   _SignupScreenState createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthService auth = AuthService();
   String fullName;
   String emailAddress;
   int phoneNumber;
@@ -22,15 +23,16 @@ class _SignupScreenState extends State<SignupScreen> {
   bool obscurePassword = true;
 
   void _handleSubmit() async {
-    // TODO: verify user input
     _formKey.currentState.save();
-    print(emailAddress);
-    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-      email: emailAddress,
-      password: password,
-    );
-    User createdUser = userCredential.user;
-    print("email ${createdUser.email}, uid ${createdUser.uid}");
+    // TODO: verify user input
+    // TODO: make sure that the user doesn't exist in the db
+    final UserModel user =
+        await auth.signupWithEmailAndPassword(emailAddress, password);
+    if (user != null) {
+      // TODO: redirect t choose between client or pharmacist screen
+    }
+    //! Next line will be moved to fill pharmacy data screen
+    Navigator.pushReplacementNamed(context, '/WrapperScreen');
   }
 
   void _handleGoogleSignIn() async {
@@ -103,7 +105,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       InkWell(
                         child: Text('sign In'),
                         onTap: () =>
-                            Navigator.of(context).pushNamed('/loginScreen'),
+                            Navigator.of(context).pushNamed('/LoginScreen'),
                       ),
                     ],
                   ),
