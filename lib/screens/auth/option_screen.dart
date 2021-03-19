@@ -28,8 +28,13 @@ class _OptionScreenState extends State<OptionScreen> {
     User user = Provider.of<User>(context, listen: false);
     _formKey.currentState.save();
     Database db = Database();
-    await db.addPharmacyData(user.uid, pharmacyCode, pharmacyName, pharmacyLongitude,
-        pharmacyLatitude, pharmacyType == PharmacyType.day ? 'day' : 'night');
+    await db.addPharmacyData(
+        user.uid,
+        pharmacyCode,
+        pharmacyName,
+        pharmacyLongitude,
+        pharmacyLatitude,
+        pharmacyType == PharmacyType.day ? 'day' : 'night');
     Navigator.pushReplacementNamed(context, '/WrapperScreen');
   }
 
@@ -60,10 +65,8 @@ class _OptionScreenState extends State<OptionScreen> {
                 Expanded(
                   flex: 5,
                   child: OptionCard(
-                    onTap: () {
-                      setState(() => _screenState = ScreenState.fillPharmacy);
-                      print('done');
-                    },
+                    onTap: () =>
+                        setState(() => _screenState = ScreenState.fillPharmacy),
                     label: 'PHARMACIST',
                     assetPath: "assets/Svg/pharmacist.svg",
                   ),
@@ -92,32 +95,47 @@ class _OptionScreenState extends State<OptionScreen> {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   SizedBox(height: 50.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Pharmacy Code",
-                    onSaved: (String newValue) => pharmacyCode = newValue,
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primaryColor.withAlpha(40),
+                          blurRadius: 20.0,
+                          offset: Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                          autovalidate: false,
+                          hintText: "Pharmacy Code",
+                          onSaved: (String newValue) => pharmacyCode = newValue,
+                        ),
+                        CustomTextFormField(
+                          autovalidate: false,
+                          hintText: "Pharmacy Name",
+                          onSaved: (String newValue) => pharmacyName = newValue,
+                        ),
+                        CustomTextFormField(
+                          autovalidate: false,
+                          hintText: "Pharmacy Longitude",
+                          onSaved: (String newValue) =>
+                              pharmacyLongitude = double.parse(newValue),
+                        ),
+                        CustomTextFormField(
+                          autovalidate: false,
+                          hintText: "Pharmacy Latitude",
+                          onSaved: (String newValue) =>
+                              pharmacyLatitude = double.parse(newValue),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 20.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Pharmacy Name",
-                    onSaved: (String newValue) => pharmacyName = newValue,
-                  ),
-                  SizedBox(height: 20.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Pharmacy Longitude",
-                    onSaved: (String newValue) =>
-                        pharmacyLongitude = double.parse(newValue),
-                  ),
-                  SizedBox(height: 20.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Pharmacy Latitude",
-                    onSaved: (String newValue) =>
-                        pharmacyLatitude = double.parse(newValue),
-                  ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 30.0),
                   Text('Pharmacy type'),
                   ListTile(
                     title: const Text('night'),

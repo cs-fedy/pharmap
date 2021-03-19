@@ -19,7 +19,6 @@ class _SignupScreenState extends State<SignupScreen> {
   String emailAddress;
   int phoneNumber;
   String password;
-  bool obscurePassword = true;
 
   void _handleSubmit() async {
     _formKey.currentState.save();
@@ -54,39 +53,53 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Register to\nGet started!',
+                    'REGISTER TO GET STARTED!',
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   SizedBox(height: 50.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Full Name",
-                    onSaved: (String newValue) => fullName = newValue,
-                  ),
-                  SizedBox(height: 20.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Email Address",
-                    keyboardType: TextInputType.emailAddress,
-                    onSaved: (String newValue) => emailAddress = newValue,
-                  ),
-                  SizedBox(height: 20.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Phone Number",
-                    onSaved: (String newValue) =>
-                        phoneNumber = int.parse(newValue),
-                  ),
-                  SizedBox(height: 20.0),
-                  CustomTextFormField(
-                    autovalidate: false,
-                    fieldLabel: "Password",
-                    isPassword: true,
-                    obscureText: true,
-                    onSaved: (String newValue) => password = newValue,
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primaryColor.withAlpha(40),
+                          blurRadius: 20.0,
+                          offset: Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                          hintText: "Full Name",
+                          autovalidate: false,
+                          onSaved: (newValue) => fullName = newValue,
+                        ),
+                        CustomTextFormField(
+                          hintText: "Email Address",
+                          autovalidate: false,
+                          keyboardType: TextInputType.emailAddress,
+                          onSaved: (newValue) => emailAddress = newValue,
+                        ),
+                        CustomTextFormField(
+                          hintText: "Phone number",
+                          autovalidate: false,
+                          onSaved: (newValue) =>
+                              phoneNumber = int.parse(newValue),
+                        ),
+                        CustomTextFormField(
+                          hintText: "Password",
+                          autovalidate: false,
+                          isPassword: true,
+                          obscureText: true,
+                          onSaved: (newValue) => password = newValue,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   CustomButton(
@@ -94,17 +107,16 @@ class _SignupScreenState extends State<SignupScreen> {
                     bgColor: primaryColor,
                     press: _handleSubmit,
                   ),
-                  SizedBox(height: 15.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Already have an account?'),
-                      InkWell(
-                        child: Text('sign In'),
-                        onTap: () =>
-                            Navigator.of(context).pushNamed('/LoginScreen'),
+                  SizedBox(height: 30.0),
+                  InkWell(
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/LoginScreen'),
+                    child: Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                        color: secondaryColor,
                       ),
-                    ],
+                    ),
                   ),
                   SizedBox(height: 100.0),
                   Column(
@@ -132,7 +144,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
