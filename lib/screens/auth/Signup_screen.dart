@@ -32,7 +32,11 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _handleGoogleSignIn() async {
-    print('sign in with google');
+    // TODO: make sure user doesn't exist in the db
+    User user = await auth.signInWithGoogle();
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, '/OptionScreen');
+    }
   }
 
   void _handleTwitterSignIn() async {
