@@ -33,7 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _handleGoogleSignIn() async {
     // TODO: make sure user doesn't exist in the db
-    User user = await auth.signInWithGoogle();
+    User user = await auth.signInWithGoogle('signup');
     if (user != null) {
       Navigator.pushReplacementNamed(context, '/OptionScreen');
     }
@@ -116,7 +116,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     onTap: () =>
                         Navigator.of(context).pushNamed('/LoginScreen'),
                     child: Text(
-                      "Forgot Password?",
+                      "Already have an account?",
                       style: TextStyle(
                         color: secondaryColor,
                       ),

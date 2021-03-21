@@ -4,6 +4,7 @@ import 'package:pharmap/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  GoogleSignIn _googleSignIn = GoogleSignIn();
   final Database _db = Database();
 
   Stream<User> get user {
@@ -25,31 +26,47 @@ class AuthService {
       return null;
     }
   }
-  // sign in with email and password
-  // sign in with email and password
 
-  Future<User> signInWithGoogle() async {
-    GoogleSignIn googleSignIn = GoogleSignIn();
-    GoogleSignInAccount user = await googleSignIn.signIn();
+  Future<User> signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential.user;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  Future<User> signInWithGoogle(String fromScreen) async {
+    GoogleSignInAccount user = await _googleSignIn.signIn();
     if (user != null) {
       GoogleSignInAuthentication googleAuth = await user.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       User createdUser = userCredential.user;
-      await _db.addUserInfo(createdUser.uid, createdUser.displayName, int.parse(createdUser.phoneNumber));
+      if (fromScreen == 'signup') {
+        await _db.addUserInfo(createdUser.uid, createdUser.displayName, null);
+      }
       return createdUser;
     }
     return null;
   }
 
+  Future<void> sendVerificationEmail(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
   Future<void> signout() async {
-    try {
-      return _auth.signOut();
-    } catch (error) {
-      return null;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    if (await googleSignIn.isSignedIn()) {
+      await googleSignIn.disconnect();
     }
+    return await _auth.signOut();
   }
 }
