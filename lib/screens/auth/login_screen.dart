@@ -16,23 +16,24 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthService auth = AuthService();
   String emailAddress;
   String password;
+  List<String> errors = [];
 
   void _handleSubmit() async {
+    setState(() => errors = []);
     _formKey.currentState.save();
-    // TODO: verify user input
-    // TODO: make sure that the user exist in the db
-    final User user =
+    dynamic user =
         await auth.signInWithEmailAndPassword(emailAddress, password);
-    if (user != null) {
+    if (user is User) {
       Navigator.pushReplacementNamed(context, '/HomeScreen');
     }
+    setState(() => errors.add(user));
   }
 
   void _handleGoogleSignIn() async {
     // TODO: make sure user doesn't exist in the db
     User user = await auth.signInWithGoogle('signup');
     if (user != null) {
-      Navigator.pushReplacementNamed(context, '/OptionScreen');
+      Navigator.pushReplacementNamed(context, '/WrapperScreen');
     }
   }
 
@@ -91,6 +92,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      children: errors
+                          .map(
+                            (element) => Text(
+                              element,
+                              style: TextStyle(color: dangerColor),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
                   SizedBox(height: 20.0),
                   CustomButton(
                     text: 'Login',
@@ -98,15 +112,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     press: _handleSubmit,
                   ),
                   SizedBox(height: 30.0),
-                  InkWell(
-                    onTap: () =>
-                        Navigator.of(context).pushNamed('/ResetPasswordScreen'),
-                    child: Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                        color: secondaryColor,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () => Navigator.of(context)
+                            .pushNamed('/ResetPasswordScreen'),
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            color: secondaryColor,
+                          ),
+                        ),
                       ),
-                    ),
+                      InkWell(
+                        onTap: () =>
+                            Navigator.of(context).pushNamed('/SignupScreen'),
+                        child: Text(
+                          "You don't have an account?",
+                          style: TextStyle(
+                            color: secondaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 100.0),
                   Column(

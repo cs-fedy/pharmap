@@ -17,18 +17,37 @@ class _SignupScreenState extends State<SignupScreen> {
   AuthService auth = AuthService();
   String fullName;
   String emailAddress;
-  int phoneNumber;
+  String phoneNumber;
   String password;
+  List<String> errors = [];
+
+  List<String> checkUserInputValidity() {
+    List<String> errors = [];
+    if (phoneNumber.trim() == '') {
+      errors.add('phone number must be provided');
+    }
+
+    if (fullName.trim() == '') {
+      errors.add('full name must be provided');
+    }
+    return errors;
+  }
 
   void _handleSubmit() async {
+    setState(() => errors = []);
     _formKey.currentState.save();
-    // TODO: verify user input
-    // TODO: make sure that the user doesn't exist in the db
-    final User user = await auth.signupWithEmailAndPassword(
-        emailAddress, password, fullName, phoneNumber);
-    if (user != null) {
+    List<String> userInputState = checkUserInputValidity();
+    if (userInputState.isNotEmpty) {
+      setState(() => errors.addAll(userInputState));
+      return;
+    }
+
+    dynamic user = await auth.signupWithEmailAndPassword(
+        emailAddress, password, fullName, int.parse(phoneNumber));
+    if (user is User) {
       Navigator.pushReplacementNamed(context, '/OptionScreen');
     }
+    setState(() => errors.add(user));
   }
 
   void _handleGoogleSignIn() async {
@@ -92,8 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         CustomTextFormField(
                           hintText: "Phone number",
                           autovalidate: false,
-                          onSaved: (newValue) =>
-                              phoneNumber = int.parse(newValue),
+                          onSaved: (newValue) => phoneNumber = newValue,
                         ),
                         CustomTextFormField(
                           hintText: "Password",
@@ -105,7 +123,20 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      children: errors
+                          .map(
+                            (element) => Text(
+                              element,
+                              style: TextStyle(color: dangerColor),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
                   CustomButton(
                     text: 'continue',
                     bgColor: primaryColor,

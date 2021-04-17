@@ -40,7 +40,7 @@ class SplashScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline1,
                       ),
                       Text(
-                        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+                        'clients do not easily find the medications they need resulting in a waste of time. This application helps the user to find a nearby pharmacy that contains the medicine they are looking for.',
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],

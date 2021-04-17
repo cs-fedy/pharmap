@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pharmap/services/database.dart';
 
@@ -11,7 +12,9 @@ class AuthService {
     return _auth.authStateChanges();
   }
 
-  Future<User> signupWithEmailAndPassword(String emailAddress, String password,
+  Future checkUserExistance(String email) async {}
+
+  Future signupWithEmailAndPassword(String emailAddress, String password,
       String fullName, int phoneNumber) async {
     try {
       UserCredential userCredential =
@@ -22,20 +25,22 @@ class AuthService {
       User createdUser = userCredential.user;
       await _db.addUserInfo(createdUser.uid, fullName, phoneNumber);
       return createdUser;
-    } catch (error) {
-      return null;
+    } catch (signUpError) {
+      List<String> error = signUpError.toString().split('] ');
+      return error.last;
     }
   }
 
-  Future<User> signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
       return userCredential.user;
-    } catch (error) {
-      return null;
+    } catch (signUpError) {
+      List<String> error = signUpError.toString().split('] ');
+      return error.last;
     }
   }
 

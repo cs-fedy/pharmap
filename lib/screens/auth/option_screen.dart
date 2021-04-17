@@ -20,20 +20,53 @@ class _OptionScreenState extends State<OptionScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String pharmacyCode;
   String pharmacyName;
-  double pharmacyLongitude;
-  double pharmacyLatitude;
+  String pharmacyLongitude;
+  String pharmacyLatitude;
   PharmacyType pharmacyType;
+  List<String> errors = [];
+
+  List<String> checkUserInputValidity() {
+    List<String> errors = [];
+    if (pharmacyCode.trim() == '') {
+      errors.add('pharmacy code must be provided');
+    }
+
+    if (pharmacyName.trim() == '') {
+      errors.add('pharmacy name must be provided');
+    }
+
+    if (pharmacyLongitude.trim() == '') {
+      errors.add('pharmacy longitude must be provided');
+    }
+
+    if (pharmacyLatitude.trim() == '') {
+      errors.add('pharmacy latitude must be provided');
+    }
+
+    if (pharmacyType == null) {
+      errors.add('pharmacy type must be provided');
+    }
+    return errors;
+  }
 
   void _handleSubmit() async {
+    setState(() => errors = []);
     User user = Provider.of<User>(context, listen: false);
     _formKey.currentState.save();
     Database db = Database();
+
+    List<String> userInputState = checkUserInputValidity();
+    if (userInputState.isNotEmpty) {
+      setState(() => errors.addAll(userInputState));
+      return;
+    }
+
     await db.addPharmacyData(
         user.uid,
         pharmacyCode,
         pharmacyName,
-        pharmacyLongitude,
-        pharmacyLatitude,
+        double.parse(pharmacyLongitude),
+        double.parse(pharmacyLatitude),
         pharmacyType == PharmacyType.day ? 'day' : 'night');
     Navigator.pushReplacementNamed(context, '/WrapperScreen');
   }
@@ -124,13 +157,13 @@ class _OptionScreenState extends State<OptionScreen> {
                           autovalidate: false,
                           hintText: "Pharmacy Longitude",
                           onSaved: (String newValue) =>
-                              pharmacyLongitude = double.parse(newValue),
+                              pharmacyLongitude = newValue,
                         ),
                         CustomTextFormField(
                           autovalidate: false,
                           hintText: "Pharmacy Latitude",
                           onSaved: (String newValue) =>
-                              pharmacyLatitude = double.parse(newValue),
+                              pharmacyLatitude = newValue,
                         ),
                       ],
                     ),
@@ -161,7 +194,20 @@ class _OptionScreenState extends State<OptionScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      children: errors
+                          .map(
+                            (element) => Text(
+                              element,
+                              style: TextStyle(color: dangerColor),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
                   CustomButton(
                     text: 'save data',
                     bgColor: primaryColor,
