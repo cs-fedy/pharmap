@@ -20,6 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String phoneNumber;
   String password;
   List<String> errors = [];
+  bool isSigningIn = false;
 
   List<String> checkUserInputValidity() {
     List<String> errors = [];
@@ -34,7 +35,10 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _handleSubmit() async {
-    setState(() => errors = []);
+    setState(() {
+      errors = [];
+      isSigningIn = true;
+    });
     _formKey.currentState.save();
     List<String> userInputState = checkUserInputValidity();
     if (userInputState.isNotEmpty) {
@@ -51,6 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _handleGoogleSignIn() async {
+    setState(() => isSigningIn = true);
     // TODO: make sure user doesn't exist in the db
     User user = await auth.signInWithGoogle('signup');
     if (user != null) {
@@ -138,9 +143,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   SizedBox(height: 10.0),
                   CustomButton(
-                    text: 'continue',
+                    text: isSigningIn ? 'loading...' : 'Continue',
                     bgColor: primaryColor,
-                    press: _handleSubmit,
+                    press: isSigningIn? (){}: _handleSubmit,
                   ),
                   SizedBox(height: 30.0),
                   InkWell(

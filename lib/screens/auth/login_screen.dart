@@ -17,9 +17,13 @@ class _LoginScreenState extends State<LoginScreen> {
   String emailAddress;
   String password;
   List<String> errors = [];
+  bool isSigningIn = false;
 
   void _handleSubmit() async {
-    setState(() => errors = []);
+    setState(() {
+      errors = [];
+      isSigningIn = true;
+    });
     _formKey.currentState.save();
     dynamic user =
         await auth.signInWithEmailAndPassword(emailAddress, password);
@@ -30,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleGoogleSignIn() async {
+    setState(() => isSigningIn = true);
     // TODO: make sure user doesn't exist in the db
     User user = await auth.signInWithGoogle('signup');
     if (user != null) {
@@ -45,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
     print('sign in with facebook');
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -107,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 20.0),
                   CustomButton(
-                    text: 'Login',
+                    text: isSigningIn? 'loading...': 'Login',
                     bgColor: primaryColor,
-                    press: _handleSubmit,
+                    press: isSigningIn? (){}: _handleSubmit,
                   ),
                   SizedBox(height: 30.0),
                   Row(
