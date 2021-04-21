@@ -30,7 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (user is User) {
       Navigator.pushReplacementNamed(context, '/HomeScreen');
     }
-    setState(() => errors.add(user));
+    setState(() {
+      errors.add(user); 
+      isSigningIn = false;
+    });
   }
 
   void _handleGoogleSignIn() async {

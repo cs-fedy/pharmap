@@ -51,7 +51,10 @@ class _SignupScreenState extends State<SignupScreen> {
     if (user is User) {
       Navigator.pushReplacementNamed(context, '/OptionScreen');
     }
-    setState(() => errors.add(user));
+        setState(() {
+      errors.add(user); 
+      isSigningIn = false;
+    });
   }
 
   void _handleGoogleSignIn() async {

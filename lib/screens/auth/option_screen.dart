@@ -24,6 +24,7 @@ class _OptionScreenState extends State<OptionScreen> {
   String pharmacyLatitude;
   PharmacyType pharmacyType;
   List<String> errors = [];
+  bool isSigningIn = false;
 
   List<String> checkUserInputValidity() {
     List<String> errors = [];
@@ -50,7 +51,10 @@ class _OptionScreenState extends State<OptionScreen> {
   }
 
   void _handleSubmit() async {
-    setState(() => errors = []);
+    setState(() {
+      errors = [];
+      isSigningIn = true;
+    });
     User user = Provider.of<User>(context, listen: false);
     _formKey.currentState.save();
     Database db = Database();
@@ -209,9 +213,9 @@ class _OptionScreenState extends State<OptionScreen> {
                   ),
                   SizedBox(height: 10.0),
                   CustomButton(
-                    text: 'save data',
+                    text: isSigningIn? 'loading...': 'Save data',
                     bgColor: primaryColor,
-                    press: _handleSubmit,
+                    press: isSigningIn? (){}: _handleSubmit,
                   ),
                 ],
               ),
