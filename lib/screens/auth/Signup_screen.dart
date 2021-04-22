@@ -49,12 +49,13 @@ class _SignupScreenState extends State<SignupScreen> {
     dynamic user = await auth.signupWithEmailAndPassword(
         emailAddress, password, fullName, int.parse(phoneNumber));
     if (user is User) {
-      Navigator.pushReplacementNamed(context, '/OptionScreen');
+      Navigator.pushNamed(context, '/OptionScreen');
+    } else {
+      setState(() {
+        errors.add(user);
+        isSigningIn = false;
+      });
     }
-        setState(() {
-      errors.add(user); 
-      isSigningIn = false;
-    });
   }
 
   void _handleGoogleSignIn() async {
@@ -62,7 +63,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // TODO: make sure user doesn't exist in the db
     User user = await auth.signInWithGoogle('signup');
     if (user != null) {
-      Navigator.pushReplacementNamed(context, '/OptionScreen');
+      Navigator.pushNamed(context, '/OptionScreen');
     }
   }
 
@@ -148,7 +149,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   CustomButton(
                     text: isSigningIn ? 'loading...' : 'Continue',
                     bgColor: primaryColor,
-                    press: isSigningIn? (){}: _handleSubmit,
+                    press: isSigningIn ? () {} : _handleSubmit,
                   ),
                   SizedBox(height: 30.0),
                   InkWell(

@@ -5,7 +5,7 @@ import 'package:pharmap/utils/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   static final String id = '/HomeScreen';
-  AuthService auth = AuthService();
+  final AuthService auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
               text: 'sign out',
               press: () async {
                 await auth.signout();
+                Navigator.pushReplacementNamed(context, '/WrapperScreen');
               },
             ),
           ),

@@ -53,7 +53,7 @@ class SplashScreen extends StatelessWidget {
                       CustomButton(
                         text: "Login",
                         press: () =>
-                            Navigator.pushReplacementNamed(context, '/LoginScreen'),
+                            Navigator.pushNamed(context, '/LoginScreen'),
                         bgColor: primaryColor,
                       ),
                       SizedBox(
@@ -62,7 +62,7 @@ class SplashScreen extends StatelessWidget {
                       CustomButton(
                         text: "Signup",
                         press: () =>
-                            Navigator.pushReplacementNamed(context, '/SignupScreen'),
+                            Navigator.pushNamed(context, '/SignupScreen'),
                         bgColor: secondaryColor,
                       ),
                     ],

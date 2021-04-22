@@ -28,12 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
     dynamic user =
         await auth.signInWithEmailAndPassword(emailAddress, password);
     if (user is User) {
-      Navigator.pushReplacementNamed(context, '/HomeScreen');
+      Navigator.pushReplacementNamed(context, '/WrapperScreen');
+    } else {
+      setState(() {
+        errors.add(user);
+        isSigningIn = false;
+      });
     }
-    setState(() {
-      errors.add(user); 
-      isSigningIn = false;
-    });
   }
 
   void _handleGoogleSignIn() async {
@@ -114,9 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 20.0),
                   CustomButton(
-                    text: isSigningIn? 'loading...': 'Login',
+                    text: isSigningIn ? 'loading...' : 'Login',
                     bgColor: primaryColor,
-                    press: isSigningIn? (){}: _handleSubmit,
+                    press: isSigningIn ? () {} : _handleSubmit,
                   ),
                   SizedBox(height: 30.0),
                   Row(

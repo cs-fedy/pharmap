@@ -61,7 +61,10 @@ class _OptionScreenState extends State<OptionScreen> {
 
     List<String> userInputState = checkUserInputValidity();
     if (userInputState.isNotEmpty) {
-      setState(() => errors.addAll(userInputState));
+      setState(() {
+        errors.addAll(userInputState);
+        isSigningIn = false;
+      });
       return;
     }
 

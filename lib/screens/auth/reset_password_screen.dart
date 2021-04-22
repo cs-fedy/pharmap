@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
@@ -12,11 +14,26 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AuthService auth = AuthService();
-  String emailAddress;
+  String emailAddress = '';
+  String error = '';
+  bool isSigningIn = false;
+
   void _handleSubmit() async {
+    setState(() {
+      error = '';
+      isSigningIn = true;
+    });
     _formKey.currentState.save();
-    await auth.sendVerificationEmail(emailAddress);
-    Navigator.pushReplacementNamed(context, '/LoginScreen');
+    if (emailAddress.trim() == '') {
+      print('emailAddress === ${emailAddress.trim() == ''}');
+      setState(() {
+        isSigningIn = false;
+        error = "email is required";
+      });
+    } else {
+      await auth.sendVerificationEmail(emailAddress);
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -57,11 +74,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       onSaved: (newValue) => emailAddress = newValue,
                     ),
                   ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    error != '' ? error : '',
+                    style: TextStyle(color: dangerColor),
+                  ),
                   SizedBox(height: 20.0),
                   CustomButton(
-                    text: 'get verification code',
+                    text: isSigningIn ? 'loading...' : 'Get verification code',
                     bgColor: primaryColor,
-                    press: _handleSubmit,
+                    press: isSigningIn ? () {} : _handleSubmit,
                   ),
                 ],
               ),
