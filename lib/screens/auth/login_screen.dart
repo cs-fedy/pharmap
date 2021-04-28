@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
 import 'package:pharmap/components/login_with_social_media.dart';
@@ -68,7 +69,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Welcome back!\nLogin to continue',
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  SizedBox(height: 50.0),
+                  SizedBox(height: 10.0),
+
+
+                  
+                  Container(
+                    child: SvgPicture.asset("assets/svg/login.svg",
+                    semanticsLabel: "pharmap illustration",
+                    height: 360, 
+                     width: 360,
+                    ),
+                  ),
+                  
+
                   Container(
                     padding: EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
@@ -82,6 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
+                    
+                  
+                    
+                  
+                  
                     child: Column(
                       children: [
                         CustomTextFormField(
@@ -149,7 +167,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text('or sign in with'),
+                      Text(
+                        "or sign in with",
+                        style:TextStyle(
+                          color:darkPrimaryColor,
+                        )
+                        ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
