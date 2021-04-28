@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
 import 'package:pharmap/components/login_with_social_media.dart';
@@ -90,6 +91,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     'REGISTER TO GET STARTED!',
                     style: Theme.of(context).textTheme.headline2,
                   ),
+                  Container(
+                    child: SvgPicture.asset("assets/svg/signup.svg",
+                    semanticsLabel: "pharmap illustration",
+                    height: 360, 
+                     width: 360,
+                    ),
+                  ),
+                  
                   SizedBox(height: 50.0),
                   Container(
                     padding: EdgeInsets.all(5.0),

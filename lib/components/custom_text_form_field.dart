@@ -18,28 +18,35 @@ class CustomTextFormField extends FormField<String> {
           autovalidate: autovalidate,
           builder: (FormFieldState<String> state) {
             return Container(
-              padding: EdgeInsets.all(8.0),
+              margin:EdgeInsets.symmetric(vertical:10),
+              padding: EdgeInsets.symmetric(horizontal:20, vertical:5),
               decoration: BoxDecoration(
+                color: Colors.lightGreen[100],
+                
                 border: Border(
                   bottom: BorderSide(
                     color: Colors.grey[100],
                   ),
                 ),
+                 
               ),
+          
               child: TextFormField(
                 obscureText: obscureText,
                 keyboardType: keyboardType,
                 cursorColor: darkPrimaryColor,
                 decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: TextStyle(color: Colors.grey[400]),
+                  hintStyle: TextStyle(color: darkPrimaryColor),
                   border: InputBorder.none,
                   suffixIcon: isPassword
                       ? IconButton(
                           icon: Icon(
+                            
                             obscureText
                                 ? Icons.visibility_off
                                 : Icons.visibility,
+                                color: darkPrimaryColor,
                           ),
                           onPressed: () => state.setState(() {
                             obscureText = !obscureText;
@@ -48,7 +55,9 @@ class CustomTextFormField extends FormField<String> {
                       : null,
                 ),
                 onChanged: (String value) => state.didChange(value),
-              ),
+              
+            
+           ),
             );
           },
         );

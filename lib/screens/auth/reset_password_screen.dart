@@ -1,6 +1,7 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
 import 'package:pharmap/services/auth.dart';
@@ -51,8 +52,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     'Reset password',
                     style: Theme.of(context).textTheme.headline2,
                   ),
+                  Container(
+                    child: SvgPicture.asset("assets/svg/Forgot password-pana.svg",
+                    semanticsLabel: "pharmap illustration",
+                    height: 360, 
+                     width: 360,
+                    ),
+                  ),
+                  
                   Text(
-                      'Enter your email to get a verfication\ncode and reset your password'),
+                      'Enter your email to get a verfication\ncode and reset your password',
+                      style:TextStyle(
+                        color: darkPrimaryColor,
+                      ),
+                      
+                      ),
                   SizedBox(height: 50.0),
                   Container(
                     padding: EdgeInsets.all(5.0),
