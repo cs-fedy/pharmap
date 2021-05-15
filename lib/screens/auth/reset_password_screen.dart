@@ -53,7 +53,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    child: SvgPicture.asset("assets/svg/Forgot password-pana.svg",
+                    child: SvgPicture.asset("assets/Svg/Forgot password-pana.svg",
                     semanticsLabel: "pharmap illustration",
                     height: 360, 
                      width: 360,

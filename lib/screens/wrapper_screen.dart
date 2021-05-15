@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmap/components/bottom_nav_bar.dart';
 import 'package:pharmap/screens/auth/splash_screen.dart';
-import 'package:pharmap/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class WrapperScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _WrapperScreenState extends State<WrapperScreen> {
     if (user == null) {
       return SplashScreen();
     } else {
-      return HomeScreen();
+      return BottomNavBar();
     }
   }
 }
