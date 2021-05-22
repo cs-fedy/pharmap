@@ -20,7 +20,7 @@ class ExploreAppBar extends StatelessWidget implements PreferredSizeWidget {
         height: height ,
         child: Column(
           children: [
-            
+
             _exploreOptionList(context),
           ],
         ),
@@ -64,7 +64,7 @@ class ExploreAppBar extends StatelessWidget implements PreferredSizeWidget {
             title: 'Inhalers',
             context: context,
           ),
-          
+
         ],
       ),
     );
@@ -113,10 +113,7 @@ class ExploreAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(height);
+
+
 }
 
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => throw UnimplementedError();
-
- 

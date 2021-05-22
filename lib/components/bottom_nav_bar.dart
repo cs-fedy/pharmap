@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:pharmap/screens/home/resultScreen.dart';
+import 'package:pharmap/screens/home/explore_screen.dart';
+import 'package:pharmap/screens/home/result_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
 import 'package:pharmap/screens/home/notification_screen.dart';
 import 'package:pharmap/screens/home/profile_screen.dart';
@@ -17,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   List<Widget> _buildScreens() {
     return [
       HomeScreen(),
-      ResultScreen(),
+      ExploreScreen(),
       NotificationScreen(),
       ProfileScreen(),
     ];
