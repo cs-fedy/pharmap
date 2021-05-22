@@ -74,10 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   
                   Container(
-                    child: SvgPicture.asset("assets/svg/login.svg",
-                    semanticsLabel: "pharmap illustration",
-                    height: 360, 
-                     width: 360,
+                    child: SvgPicture.asset(
+                      "assets/Svg/login.svg",
+                      semanticsLabel: "pharmap illustration",
                     ),
                   ),
                   

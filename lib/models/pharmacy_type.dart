@@ -1,0 +1,1 @@
+enum PharmacyType { night, day }
