@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmap/utils/constants.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({Key key, this.text, this.press, this.bgColor, this.width})
+const CustomButton({Key key, this.text, this.press, this.bgColor, this.width})
       : super(key: key);
   final String text;
   final Function press;

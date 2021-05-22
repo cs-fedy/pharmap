@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmap/screens/auth/Signup_screen.dart';
 import 'package:pharmap/screens/auth/login_screen.dart';
 import 'package:pharmap/screens/auth/option_screen.dart';
+import 'package:pharmap/screens/auth/explore_screen.dart';
 import 'package:pharmap/screens/auth/reset_password_screen.dart';
 import 'package:pharmap/screens/auth/splash_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           SignupScreen.id: (BuildContext context) => SignupScreen(),
           OptionScreen.id: (BuildContext context) => OptionScreen(),
           HomeScreen.id: (BuildContext context) => HomeScreen(),
+          ExploreScreen.id:(BuildContext context) =>ExploreScreen(),
           PayScreen.id: (BuildContext context) => PayScreen(),
         },
       ),

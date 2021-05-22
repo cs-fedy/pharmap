@@ -1,0 +1,14 @@
+[
+    {
+      "featureType": "poi.medical",
+      "elementType": "labels.icon",
+      "stylers": [
+        {
+          "color": "#ff3d3d"
+        },
+        {
+          "visibility": "on"
+        }
+      ]
+    }
+  ]
