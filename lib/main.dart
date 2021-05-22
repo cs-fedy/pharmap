@@ -7,6 +7,7 @@ import 'package:pharmap/screens/auth/option_screen.dart';
 import 'package:pharmap/screens/auth/reset_password_screen.dart';
 import 'package:pharmap/screens/auth/splash_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
+import 'package:pharmap/screens/home/pay_screen.dart';
 import 'package:pharmap/screens/wrapper_screen.dart';
 import 'package:pharmap/services/auth.dart';
 import 'package:pharmap/utils/constants.dart';
@@ -35,10 +36,12 @@ class MyApp extends StatelessWidget {
           WrapperScreen.id: (BuildContext context) => WrapperScreen(),
           SplashScreen.id: (BuildContext context) => SplashScreen(),
           LoginScreen.id: (BuildContext context) => LoginScreen(),
-          ResetPasswordScreen.id: (BuildContext context) => ResetPasswordScreen(),
+          ResetPasswordScreen.id: (BuildContext context) =>
+              ResetPasswordScreen(),
           SignupScreen.id: (BuildContext context) => SignupScreen(),
           OptionScreen.id: (BuildContext context) => OptionScreen(),
           HomeScreen.id: (BuildContext context) => HomeScreen(),
+          PayScreen.id: (BuildContext context) => PayScreen(),
         },
       ),
     );
