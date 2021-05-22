@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
     dynamic user =
         await auth.signInWithEmailAndPassword(emailAddress, password);
     if (user is User) {
-      Navigator.pushReplacementNamed(context, '/WrapperScreen');
+      Navigator.pushReplacementNamed(context, '/ExloreScreen');
     } else {
       setState(() {
         errors.add(user);

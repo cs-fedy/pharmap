@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "509105445962",
+    "project_id": "pharmap-fac0b",
+    "storage_bucket": "pharmap-fac0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509105445962:android:683cb349487f3aa6841ab3",
+        "android_client_info": {
+          "package_name": "com.example.pharmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509105445962-c7fcnd2nork2d3m256nskb27pbhdqglj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pharmap",
+            "certificate_hash": "66690cace96aefa776f9c7b5f1e1b6129ce08145"
+          }
+        },
+        {
+          "client_id": "509105445962-bogr5ntnrv68qch15pluap85hklptqku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHp2wENg7bPYlTV2BodFcs3lxwIB9X3Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509105445962-bogr5ntnrv68qch15pluap85hklptqku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmap/screens/auth/splash_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:pharmap/screens/auth/explore_screen.dart';
 
 class WrapperScreen extends StatefulWidget {
   static final String id = '/WrapperScreen';
@@ -17,7 +18,7 @@ class _WrapperScreenState extends State<WrapperScreen> {
     if (user == null) {
       return SplashScreen();
     } else {
-      return HomeScreen();
+      return ExploreScreen();
     }
   }
 }
