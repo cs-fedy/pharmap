@@ -9,7 +9,9 @@ final Color acsentColor = Color(0xFFF4A261);
 final Color lightColor = Color(0xFFE9C46A);
 final Color bgColor = Color(0xFFF1FAEE);
 final Color dangerColor = Color(0xFFE63946);
-
+const kTextColor = Color(0xFF535353);
+const kTextLightColor = Color(0xFFACACAC);
+const kDefaultPaddin = 20.0;
 //* Text custom theme:
 final TextTheme textTheme = TextTheme(
   headline1: GoogleFonts.poppins(

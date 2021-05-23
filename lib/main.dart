@@ -12,6 +12,8 @@ import 'package:pharmap/screens/wrapper_screen.dart';
 import 'package:pharmap/services/auth.dart';
 import 'package:pharmap/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:pharmap/screens/search/search_screen.dart';
+import 'package:pharmap/screens/search/about_drug_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +43,8 @@ class MyApp extends StatelessWidget {
           SignupScreen.id: (BuildContext context) => SignupScreen(),
           OptionScreen.id: (BuildContext context) => OptionScreen(),
           PayScreen.id: (BuildContext context) => PayScreen(),
+          AboutDrugScreen.id: (BuildContext context) => AboutDrugScreen(),
+          SearchScreen.id: (BuildContext context) => SearchScreen(),
         },
       ),
     );

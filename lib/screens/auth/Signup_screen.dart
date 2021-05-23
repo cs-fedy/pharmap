@@ -61,7 +61,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _handleGoogleSignIn() async {
     setState(() => isSigningIn = true);
-    // TODO: make sure user doesn't exist in the db
     User user = await auth.signInWithGoogle('signup');
     if (user != null) {
       Navigator.pushNamed(context, '/OptionScreen');

@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleGoogleSignIn() async {
     setState(() => isSigningIn = true);
-    // TODO: make sure user doesn't exist in the db
+    
     User user = await auth.signInWithGoogle('signup');
     if (user != null) {
       Navigator.pushReplacementNamed(context, '/WrapperScreen');

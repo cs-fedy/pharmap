@@ -5,6 +5,9 @@ class Database {
       FirebaseFirestore.instance.collection("clients");
   final CollectionReference _pharmacyDataCollection =
       FirebaseFirestore.instance.collection("pharmacy");
+        final CollectionReference _drugsDataCollection =
+      FirebaseFirestore.instance.collection("drugs");
+      
 
   Future addUserInfo(String uid, String fullName, int phoneNumber) async {
     return await _clientsDataCollection.doc(uid).set({
@@ -27,5 +30,15 @@ class Database {
       'pharmacyLatitude': pharmacyLatitude,
       'pharmacyType': pharmacyType
     });
+  }
+
+  Future getFilteredDrugs(String query) async {
+    QuerySnapshot drugs = await _drugsDataCollection.get();
+    List<QueryDocumentSnapshot> drugsList = drugs.docs;
+    return drugsList.where((drug) => drug["searchKeys"].contains(query));
+  }
+
+  Future addDrugToRecentList(QueryDocumentSnapshot drug) async {
+    return await _drugsDataCollection.doc(drug.id).set({});
   }
 }
