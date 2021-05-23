@@ -30,6 +30,7 @@ dependencies:
   google_sign_in: ^5.0.0
   cloud_firestore: ^1.0.1
   provider: ^5.0.0
+  material_floating_search_bar: ^0.3.4
 
 
   # The following adds the Cupertino Icons font to your application.

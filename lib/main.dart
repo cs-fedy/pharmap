@@ -11,6 +11,10 @@ import 'package:pharmap/screens/wrapper_screen.dart';
 import 'package:pharmap/services/auth.dart';
 import 'package:pharmap/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:pharmap/screens/search/search_screen.dart';
+import 'package:pharmap/screens/search/about_drug_screen.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +34,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: bgColor,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: WrapperScreen.id,
+        initialRoute: SearchScreen.id,
         routes: <String, WidgetBuilder>{
+          
+        
+          AboutDrugScreen.id: (BuildContext context) => AboutDrugScreen(),
+          SearchScreen.id: (BuildContext context) => SearchScreen(),
           WrapperScreen.id: (BuildContext context) => WrapperScreen(),
           SplashScreen.id: (BuildContext context) => SplashScreen(),
           LoginScreen.id: (BuildContext context) => LoginScreen(),
