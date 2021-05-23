@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/custom_text_form_field.dart';
 import 'package:pharmap/components/option_card.dart';
+import 'package:pharmap/models/pharmacy_type.dart';
 import 'package:pharmap/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:pharmap/services/database.dart';
 
 enum ScreenState { choose, fillPharmacy }
-enum PharmacyType { night, day }
 
 class OptionScreen extends StatefulWidget {
   static final String id = '/OptionScreen';

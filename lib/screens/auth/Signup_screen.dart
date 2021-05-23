@@ -91,7 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    child: SvgPicture.asset("assets/svg/signup.svg",
+                    child: SvgPicture.asset("assets/Svg/signup.svg",
                     semanticsLabel: "pharmap illustration",
                     height: 360, 
                      width: 360,

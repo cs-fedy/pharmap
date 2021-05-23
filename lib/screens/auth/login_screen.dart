@@ -70,18 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   SizedBox(height: 10.0),
-
-
-                  
                   Container(
-                    child: SvgPicture.asset("assets/svg/login.svg",
-                    semanticsLabel: "pharmap illustration",
-                    height: 360, 
-                     width: 360,
+                    child: SvgPicture.asset(
+                      "assets/Svg/login.svg",
+                      semanticsLabel: "pharmap illustration",
                     ),
                   ),
-                  
-
                   Container(
                     padding: EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
@@ -95,11 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    
-                  
-                    
-                  
-                  
                     child: Column(
                       children: [
                         CustomTextFormField(
@@ -167,12 +156,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "or sign in with",
-                        style:TextStyle(
-                          color:darkPrimaryColor,
-                        )
-                        ),
+                      Text("or sign in with",
+                          style: TextStyle(
+                            color: darkPrimaryColor,
+                          )),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
