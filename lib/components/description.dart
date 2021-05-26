@@ -18,7 +18,7 @@ class Description extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
          Text(
-            drug.name,
+            drug.drugName,
             style: Theme.of(context)
                 .textTheme
                 .headline4
@@ -26,20 +26,20 @@ class Description extends StatelessWidget {
                 ),
                       SizedBox(height: kDefaultPaddin / 2),
          Text(
-          drug.category,
+          drug.drugCategory,
           style: Theme.of(context).textTheme.bodyText1
           ,
         ),
                 SizedBox(height: kDefaultPaddin / 2),
          Text(
-          drug.quantity,
+          drug.drugQuantity,
           style: Theme.of(context).textTheme.bodyText1
          ,
         ),
         SizedBox(height: kDefaultPaddin / 2), 
         
         Text(
-          drug.description,
+          drug.drugDescription,
           style: Theme.of(context).textTheme.bodyText1,
         ),
       ]),
