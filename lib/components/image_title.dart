@@ -26,9 +26,9 @@ class DrugTitleWithImage extends StatelessWidget {
               SizedBox(width: kDefaultPaddin),
               Expanded(
                 child: Hero(
-                  tag: "${drug.id}",
+                  tag: "${drug.drugId}",
                   child: Image.asset(
-                    drug.image,
+                    drug.drugImage,
                     fit: BoxFit.fill,
                   ),
                 ),
