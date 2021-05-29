@@ -31,46 +31,73 @@ class DrugCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Color(0xFF073738),
+              color:darkPrimaryColor,
               offset: Offset(2, 3),
               blurRadius: 10,
             ),
           ],
         ),
+
         child: Row(
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Image.asset(drug.drugImage),
             ),
             Expanded(
-              flex: 2,
+              flex: 6,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     drug.drugName,
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                    style: Theme.of(context)
+                .textTheme
+                .headline4.copyWith(color:dangerColor,fontSize: 20)
+
                     ),
+                  
+                 SizedBox(height: 10),
+                  Text(
+                    drug.drugQuantity,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize:10)
                   ),
+                 SizedBox(height: 5),
+
+                  Text(
+                    drug.drugCategory,
+                   style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize:10)
+                  ), 
+                  ],
+              ),
+            ),
                   SizedBox(height: 15),
-                  Row(
+              Expanded(
+               flex: 2,
+
+                child:Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         drug.drugPrice.toString(),
                         style: TextStyle(
                           color: primaryColor,
-                          fontSize: 25,
+                          fontSize: 20,
+                        ),
+                      ),
+                      
+                      Text(
+                        'DT',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 10,
                         ),
                       ),
                     ],
                   ),
-                ],
+                  ],
               ),
             ),
           ],
