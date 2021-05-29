@@ -43,17 +43,14 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ],
         builder: (context, transition) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Material(
-              color: Colors.white,
-              elevation: 4.0,
-              child: Column(
+          return 
+          
+             Column(
                 mainAxisSize: MainAxisSize.min,
                 children: drugsList.map((e) => DrugCard(drug: e)).toList(),
-              ),
-            ),
-          );
+              );
+            
+          
         },
       ),
     );

@@ -25,7 +25,7 @@ List<Drug> drugs = [
     drugId: "a4bf471a-a1c9-4904-8085-975dd953aa23",
     drugName: "panadol",
     drugQuantity: "500mg",
-    drugPrice: 3270,
+    drugPrice: 3.270,
     drugDescription:
         "Panadol Extra contient comme principe actif analgésique du paracétamol,ainsi que de la caféine. Panadol Extra est utilisé pour le traitement à court terme des maux de tête dintensité légère à modérée.",
     drugImage: "assets/images/panadolextra.png",
@@ -51,6 +51,8 @@ List<Drug> drugs = [
     drugDescription:
         "Panadol Extra contient comme principe actif analgésique du paracétamol,ainsi que de la caféine. Panadol Extra est utilisé pour le traitement à court terme des maux de tête dintensité légère à modérée.",
     drugImage: "assets/images/panadolextra.png",
+        drugCategory: "Paracétamol",
+
     drugType: "serop",
   )
 ];
