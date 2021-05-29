@@ -27,7 +27,7 @@ class LookForPharmacies extends StatelessWidget {
               drugId: drug.drugId,
               pharmacies: pharmaciesList
                   .where((pharmacy) =>
-                      pharmacy.pharmacyDrugs.indexOf(drug.drugId) > 0)
+                      pharmacy.pharmacyDrugs.contains(drug.drugId))
                   .toList(),
             ),
           ),

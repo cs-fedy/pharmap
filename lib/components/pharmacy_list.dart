@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmap/models/drug.dart';
 import 'package:pharmap/models/pharmacy.dart';
 import 'package:pharmap/models/pharmacy_type.dart';
 import 'package:pharmap/screens/home/pay_screen.dart';
@@ -58,8 +59,7 @@ class PharmacyListWidget extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => PayScreen(
-                                drugId: drugId,
-                                pharmacy: e,
+                                drug: drugs.where((element) => element.drugId == this.drugId).first,
                               ),
                             ),
                           );
