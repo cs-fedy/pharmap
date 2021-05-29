@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmap/components/custom_button.dart';
+import 'package:pharmap/models/drug.dart';
 import 'package:pharmap/models/pharmacy.dart';
 import 'package:pharmap/models/pharmacy_type.dart';
 import 'package:pharmap/screens/home/pay_screen.dart';
@@ -69,6 +70,20 @@ class PharmacyListWidget extends StatelessWidget {
                                ()
                         ),
                      
+                  onTap: onTap
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PayScreen(
+                                drug: drugs.where((element) => element.drugId == this.drugId).first,
+                              ),
+                            ),
+                          );
+                        }
+                      : () {},
+                ),
+              )
               .toList(),
                                   ],  )
                                   ],
@@ -79,6 +94,7 @@ class PharmacyListWidget extends StatelessWidget {
                          
         ),
       ),
-     ) );
+     ),
+    );
   }
 }
