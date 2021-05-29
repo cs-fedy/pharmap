@@ -23,78 +23,73 @@ class PharmacyListWidget extends StatelessWidget {
         child: Row(
           children: pharmacies
               .map(
-                (e) => InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15.0,
-                      horizontal: 30.0,
-                    ),
-                    margin: const EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white,boxShadow: [
-            BoxShadow(
-              color:darkPrimaryColor,
-              offset: Offset(2, 3),
-              blurRadius: 10,
-            ),
-          ],
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      e.pharmacyName,
-                                      style: Theme.of(context).textTheme.bodyText1,
-                                    ),
-                                    
-                                    Text(
-                                        e.pharmacyType == PharmacyType.day ? 'day' : 'night',
-                                        style: Theme.of(context).textTheme.bodyText1
-                                        .copyWith(fontSize:10,color:kTextColor)),
-                                        CustomButton(text: 'look for pharmacies',
-        bgColor: primaryColor,
-        press: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PayScreen(
-              drugId:drugId,
-               pharmacy: e,
+                (e) => Container(
+                  margin: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 30.0,
                   ),
-                                    ),
-                                  )
-                                
-                               ()
-                        ),
-                     
-                  onTap: onTap
-                      ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PayScreen(
-                                drug: drugs.where((element) => element.drugId == this.drugId).first,
-                              ),
-                            ),
-                          );
-                        }
-                      : () {},
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: darkPrimaryColor,
+                        offset: Offset(2, 3),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            e.pharmacyName,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          Text(
+                            e.pharmacyType == PharmacyType.day
+                                ? 'day'
+                                : 'night',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(fontSize: 10, color: kTextColor),
+                          ),
+                          onTap
+                              ? CustomButton(
+                                  text: pharmacies.isEmpty
+                                      ? "order now"
+                                      : "pay now",
+                                  press: pharmacies.isEmpty
+                                      ? () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => PayScreen(
+                                                drug: drugs
+                                                    .where((element) =>
+                                                        element.drugId ==
+                                                        this.drugId)
+                                                    .first,
+                                              ),
+                                            ),
+                                          )
+                                      : () {}, //! empty function -- to replace with order now logic
+                                )
+                              : SizedBox(height: 0.0),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               )
               .toList(),
-                                  ],  )
-                                  ],
-                                )
-                              
-                            ),
-                          ),
-                         
         ),
       ),
-     ),
     );
   }
 }
