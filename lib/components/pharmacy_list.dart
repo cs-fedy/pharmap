@@ -60,27 +60,22 @@ class PharmacyListWidget extends StatelessWidget {
                                 .bodyText1
                                 .copyWith(fontSize: 10, color: kTextColor),
                           ),
-                          onTap
-                              ? CustomButton(
-                                  text: pharmacies.isEmpty
-                                      ? "order now"
-                                      : "pay now",
-                                  press: pharmacies.isEmpty
-                                      ? () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => PayScreen(
-                                                drug: drugs
-                                                    .where((element) =>
-                                                        element.drugId ==
-                                                        this.drugId)
-                                                    .first,
-                                              ),
-                                            ),
-                                          )
-                                      : () {}, //! empty function -- to replace with order now logic
-                                )
-                              : SizedBox(height: 0.0),
+                          SizedBox(height: 10.0),
+                          ShowButton(isResultScreen: onTap, onTap: pharmacies.isNotEmpty
+                                ? () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PayScreen(
+                                          drug: drugs
+                                              .where((element) =>
+                                                  element.drugId == this.drugId)
+                                              .first,
+                                        ),
+                                      ),
+                                    )
+                                : () {}, //! empty function -- to replace with order now logic)
+                                text: pharmacies.isEmpty ? "order now" : "pay now",
+                          ),
                         ],
                       ),
                     ],
@@ -91,5 +86,28 @@ class PharmacyListWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+// ignore: must_be_immutable
+class ShowButton extends StatelessWidget {
+  bool isResultScreen = true;
+  Function onTap;
+  String text;
+  ShowButton({ this.isResultScreen, this.onTap, this.text });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isResultScreen) {
+      return CustomButton(
+        width: 200.0,
+        bgColor: dangerColor,
+        text: text,
+        press: onTap, //! empty function -- to replace with order now logic
+      );
+    }
+
+    return SizedBox(height: 0.0);
   }
 }
