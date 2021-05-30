@@ -46,3 +46,6 @@ final TextStyle buttonTextStyle = GoogleFonts.poppins(
     color: bgColor,
   ),
 );
+
+const String pharmacyimg =
+    'https://cdn.sanity.io/images/0vv8moc6/drugtopics/cdcd72c4059bf900e42c2ff60a2d33a571fe7c86-1000x667.png?fit=crop&auto=format';

@@ -19,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return [
       HomeScreen(),
       ExploreScreen(),
-      NotificationScreen(),
+      Notifications(),
       ProfileScreen(),
     ];
   }
