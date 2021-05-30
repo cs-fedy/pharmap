@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:pharmap/screens/home/explore_screen.dart';
-import 'package:pharmap/screens/home/result_screen.dart';
 import 'package:pharmap/screens/home/home_screen.dart';
 import 'package:pharmap/screens/home/notification_screen.dart';
-import 'package:pharmap/screens/home/profile_screen.dart';
 import 'package:pharmap/utils/constants.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -20,7 +18,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       HomeScreen(),
       ExploreScreen(),
       Notifications(),
-      ProfileScreen(),
     ];
   }
 
@@ -44,12 +41,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         activeColorPrimary: primaryColor,
         inactiveColorPrimary: darkPrimaryColor,
       ),
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.account_box),
-        title: ("Profile"),
-        activeColorPrimary: primaryColor,
-        inactiveColorPrimary: darkPrimaryColor,
-      ),
+      
     ];
   }
 
