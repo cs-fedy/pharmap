@@ -95,7 +95,7 @@ class PharmacyListWidget extends StatelessWidget {
                                       ),
                                     )
                                 : () => _orderNow(context),
-                            text: drugExist ? "order now" : "pay now",
+                            text: drugExist ?  "pay now": "order now",
                           ),
                         ],
                       ),
