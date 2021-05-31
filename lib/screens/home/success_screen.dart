@@ -9,22 +9,24 @@ class SuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(30.0),
-        child: Column(
-          children: [
-            Text(text),
-            SizedBox(
-              height: 15.0,
-            ),
-            CustomButton(
-              text: "return to explore screen",
-              bgColor: dangerColor,
-              press: () =>
-                  Navigator.pushReplacementNamed(context, "/ExloreScreen"),
-            ),
-          ],
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              Text(text),
+              SizedBox(
+                height: 15.0,
+              ),
+              CustomButton(
+                text: "return to explore screen",
+                bgColor: dangerColor,
+                press: () =>
+                    Navigator.pushReplacementNamed(context, "/ExloreScreen"),
+              ),
+            ],
+          ),
         ),
       ),
     );

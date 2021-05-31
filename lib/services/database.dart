@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pharmap/models/article.dart';
 import 'package:pharmap/models/drug.dart';
+import 'package:pharmap/models/notification.dart';
 import 'package:pharmap/models/pharmacy.dart';
 import 'package:pharmap/models/pharmacy_type.dart';
 
@@ -14,7 +16,8 @@ class Database {
       FirebaseFirestore.instance.collection("recent");
   final CollectionReference _notifDataCollection =
       FirebaseFirestore.instance.collection("notif");
-
+  final CollectionReference _articleDataCollection =
+      FirebaseFirestore.instance.collection("articles");
   Future addUserInfo(String uid, String fullName, int phoneNumber) async {
     return await _clientsDataCollection.doc(uid).set({
       'fullName': fullName,
@@ -111,7 +114,50 @@ class Database {
         .toList();
   }
 
-  Future<void> pushNotif(String body) async {
-    await _notifDataCollection.doc(body).set({});
+  Future<void> pushNotif(String title, String body) async {
+    await _notifDataCollection.add({"title": title, "body": body});
+  }
+
+  Future<List<Notif>> getNotifications() async {
+    QuerySnapshot notifs = await _notifDataCollection.get();
+    List<QueryDocumentSnapshot> list = notifs.docs;
+    return list
+        .map(
+          (notif) => Notif(
+            title: notif.data()['title'],
+            body: notif.data()["body"],
+          ),
+        )
+        .toList();
+  }
+
+  Future<List<Article>> getArticles() async {
+    QuerySnapshot articles = await _articleDataCollection.get();
+    List<QueryDocumentSnapshot> list = articles.docs;
+    return list
+        .map(
+          (article) => Article(
+            url: article.data()['url'],
+            image: article.data()["image"],
+            title: article.data()["title"],
+            body: article.data()["body"],
+          ),
+        )
+        .toList();
+  }
+
+  Future<Drug> getDrugById(String drugId) {
+    return _drugsDataCollection.doc(drugId).get().then(
+          (value) => Drug(
+            drugCategory: value['drugCategory'],
+            drugDescription: value["drugDescription"],
+            drugId: drugId,
+            drugImage: value["drugImage"],
+            drugName: value["drugName"],
+            drugPrice: value["drugPrice"] / 1.0,
+            drugQuantity: value["drugQuantity"],
+            drugType: value["drugType"],
+          ),
+        );
   }
 }

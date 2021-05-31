@@ -22,8 +22,10 @@ class PharmacyListWidget extends StatelessWidget {
       this.drugId,
       this.drugs,
       this.drugExist = false});
-  void _orderNow(BuildContext context) {
-    db.pushNotif("").then((value) => Navigator.push(
+  void _orderNow(BuildContext context, String title, String drugId) async {
+    Drug drug = await db.getDrugById(drugId);
+    String body = "$title has accepted your order(${drug.drugName}) request";
+    db.pushNotif(title, body).then((value) => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) =>
@@ -89,12 +91,12 @@ class PharmacyListWidget extends StatelessWidget {
                                         builder: (context) => PayScreen(
                                           drug: drugs
                                               .where((element) =>
-                                                  element.drugId == this.drugId)
+                                                  element.drugId == drugId)
                                               .first,
                                         ),
                                       ),
                                     )
-                                : () => _orderNow(context),
+                                : () => _orderNow(context, e.pharmacyName, drugId),
                             text: drugExist ?  "pay now": "order now",
                           ),
                         ],
