@@ -13,7 +13,7 @@ class _NotificationsState extends State<Notifications> {
     return Scaffold(
         body: ListView.separated(
       physics: ClampingScrollPhysics(),
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
       itemCount: 12,
       itemBuilder: (context, index) {
         return ListTile(
