@@ -26,7 +26,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     });
     _formKey.currentState.save();
     if (emailAddress.trim() == '') {
-      print('emailAddress === ${emailAddress.trim() == ''}');
       setState(() {
         isSigningIn = false;
         error = "email is required";

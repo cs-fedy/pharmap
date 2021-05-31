@@ -13,7 +13,8 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     // It provide us total height and width
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(padding: EdgeInsets.symmetric(horizontal: 30.0),
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 30.0),
       child: Column(
         children: <Widget>[
           SizedBox(
@@ -29,20 +30,18 @@ class Body extends StatelessWidget {
                         topRight: Radius.circular(40),
                       ),
                     ),
-                    
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
-                     child: Column(
-                    children: <Widget>[
-                      Description(drug: drug),
-                      SizedBox(height: kDefaultPaddin / 2),
-                      LookForPharmacies(drug:drug),
-                      SizedBox(height: kDefaultPaddin / 2),
-                    ],
-                  ),
-                    )
-                    ),
-                    DrugTitleWithImage(drug:drug),
+                      child: Column(
+                        children: <Widget>[
+                          Description(drug: drug),
+                          SizedBox(height: kDefaultPaddin / 2),
+                          LookForPharmacies(drug: drug),
+                          SizedBox(height: kDefaultPaddin / 2),
+                        ],
+                      ),
+                    )),
+                DrugTitleWithImage(drug: drug),
               ],
             ),
           )

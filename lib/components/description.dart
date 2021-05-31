@@ -17,32 +17,29 @@ class Description extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         Text(
+          Text(
             drug.drugName,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(color: Color(0xff21DAA2))
+            style: Theme.of(context).textTheme.headline4.copyWith(
+                  color: Color(0xff21DAA2),
                 ),
-                      SizedBox(height: kDefaultPaddin / 2),
-         Text(
-          drug.drugCategory,
-          style: Theme.of(context).textTheme.bodyText1
-          ,
-        ),
-                SizedBox(height: kDefaultPaddin / 2),
-         Text(
-          drug.drugQuantity,
-          style: Theme.of(context).textTheme.bodyText1
-         ,
-        ),
-        SizedBox(height: kDefaultPaddin / 2), 
-        
-        Text(
-          drug.drugDescription,
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-      ]),
+          ),
+          SizedBox(height: kDefaultPaddin / 2),
+          Text(
+            drug.drugCategory,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          SizedBox(height: kDefaultPaddin / 2),
+          Text(
+            drug.drugQuantity,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          SizedBox(height: kDefaultPaddin / 2),
+          Text(
+            drug.drugDescription,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+        ],
+      ),
     );
   }
 }

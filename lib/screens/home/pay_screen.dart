@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/components/drugcard.dart';
 import 'package:pharmap/models/drug.dart';
+import 'package:pharmap/screens/home/success_screen.dart';
 import 'package:pharmap/utils/constants.dart';
 
 // ignore: must_be_immutable
@@ -23,7 +24,13 @@ class _PayScreenState extends State<PayScreen> {
   Widget build(BuildContext context) {
     Widget addThisCard = CustomButton(
       text: "order now",
-      press: () => Navigator.pushReplacementNamed(context, "/ExloreScreen"),
+      press: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              SuccessScreen(text: "order requested successfully"),
+        ),
+      ),
       bgColor: primaryColor,
     );
 

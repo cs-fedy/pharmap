@@ -27,7 +27,7 @@ class DrugTitleWithImage extends StatelessWidget {
               Expanded(
                 child: Hero(
                   tag: "${drug.drugId}",
-                  child: Image.asset(
+                  child: Image.network(
                     drug.drugImage,
                     fit: BoxFit.fill,
                   ),

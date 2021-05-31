@@ -4,6 +4,8 @@ import 'package:pharmap/models/drug.dart';
 import 'package:pharmap/models/pharmacy.dart';
 import 'package:pharmap/models/pharmacy_type.dart';
 import 'package:pharmap/screens/home/pay_screen.dart';
+import 'package:pharmap/screens/home/success_screen.dart';
+import 'package:pharmap/services/database.dart';
 import 'package:pharmap/utils/constants.dart';
 
 // ignore: must_be_immutable
@@ -11,11 +13,28 @@ class PharmacyListWidget extends StatelessWidget {
   List<Pharmacy> pharmacies;
   bool onTap = false;
   String drugId;
-  PharmacyListWidget({this.pharmacies, this.onTap, this.drugId});
+  List<Drug> drugs;
+  bool drugExist;
+  Database db = Database();
+  PharmacyListWidget(
+      {this.pharmacies,
+      this.onTap,
+      this.drugId,
+      this.drugs,
+      this.drugExist = false});
+  void _orderNow(BuildContext context) {
+    db.pushNotif("").then((value) => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                SuccessScreen(text: "order requested successfully"),
+          ),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (pharmacies == null) return Center(child: Text("Loading.."));
+    if (pharmacies == []) return Center(child: Text("Loading.."));
     return Align(
       alignment: Alignment.bottomLeft,
       child: SingleChildScrollView(
@@ -61,7 +80,9 @@ class PharmacyListWidget extends StatelessWidget {
                                 .copyWith(fontSize: 10, color: kTextColor),
                           ),
                           SizedBox(height: 10.0),
-                          ShowButton(isResultScreen: onTap, onTap: pharmacies.isNotEmpty
+                          ShowButton(
+                            isResultScreen: onTap,
+                            onTap: drugExist
                                 ? () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -73,8 +94,8 @@ class PharmacyListWidget extends StatelessWidget {
                                         ),
                                       ),
                                     )
-                                : () {}, //! empty function -- to replace with order now logic)
-                                text: pharmacies.isEmpty ? "order now" : "pay now",
+                                : () => _orderNow(context),
+                            text: drugExist ? "order now" : "pay now",
                           ),
                         ],
                       ),
@@ -89,13 +110,12 @@ class PharmacyListWidget extends StatelessWidget {
   }
 }
 
-
 // ignore: must_be_immutable
 class ShowButton extends StatelessWidget {
   bool isResultScreen = true;
   Function onTap;
   String text;
-  ShowButton({ this.isResultScreen, this.onTap, this.text });
+  ShowButton({this.isResultScreen, this.onTap, this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +124,7 @@ class ShowButton extends StatelessWidget {
         width: 200.0,
         bgColor: dangerColor,
         text: text,
-        press: onTap, //! empty function -- to replace with order now logic
+        press: onTap,
       );
     }
 

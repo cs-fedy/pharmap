@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmap/components/custom_button.dart';
 import 'package:pharmap/models/drug.dart';
-import 'package:pharmap/models/pharmacy.dart';
 import 'package:pharmap/screens/home/result_screen.dart';
 import 'package:pharmap/utils/constants.dart';
 
@@ -24,11 +23,7 @@ class LookForPharmacies extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ResultScreen(
-              drugId: drug.drugId,
-              pharmacies: pharmaciesList
-                  .where((pharmacy) =>
-                      pharmacy.pharmacyDrugs.contains(drug.drugId))
-                  .toList(),
+              drugId: drug.drugId
             ),
           ),
         ),

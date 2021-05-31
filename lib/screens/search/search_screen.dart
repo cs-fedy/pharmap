@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:pharmap/components/drugcard.dart';
 import 'package:pharmap/models/drug.dart';
+import 'package:pharmap/services/database.dart';
 
 class SearchScreen extends StatefulWidget {
   static final String id = '/SearchScreen';
@@ -10,7 +11,19 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<Drug> drugsList = drugs;
+  List<Drug> drugsList;
+  Database db = Database();
+  
+  void _getDrugs() {
+    db.getRecentDrugs().then((value) => setState(() => drugsList = value));
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    _getDrugs();
+  }
+
   @override
   Widget build(BuildContext context) {
     final isPortrait =
@@ -29,10 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
         width: isPortrait ? 600 : 500,
         debounceDelay: const Duration(milliseconds: 500),
         onQueryChanged: (query) {
-          setState(() {
-            drugsList =
-                drugsList.where((element) => element.drugName.contains(query));
-          });
+          db.getFilteredDrugs(query).then((value) => setState(() => drugsList = value));
         },
         // Specify a custom transition to be used for
         // animating between opened and closed stated.
@@ -47,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
           
              Column(
                 mainAxisSize: MainAxisSize.min,
-                children: drugsList.map((e) => DrugCard(drug: e)).toList(),
+                children: drugsList == null? []: drugsList.map((e) => DrugCard(drug: e)).toList(),
               );
             
           
